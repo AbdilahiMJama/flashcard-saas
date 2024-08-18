@@ -21,7 +21,7 @@ export default function Flashcards() {
             
             if(docSnap.exists()) {
                 const collections = docSnap.data().flashcards || [];
-                //console.log(collections);
+                console.log(collections);
                 setFlashcards(collections);
             } else {
                 await setDoc(docRef, {flashcards: []});
@@ -38,7 +38,7 @@ export default function Flashcards() {
     return(
         <Container maxWidth="100vw">
             <Grid container spacing = {3} sx={{mt:4}} >
-                {flashcards.map((flashcard, index) => {
+                {flashcards.map((flashcard, index) => (
                     <Grid item xs={12} sm={6} md={4} key={index}>
                         <Card>
                             <CardActionArea 
@@ -51,7 +51,7 @@ export default function Flashcards() {
                             </CardActionArea>
                         </Card>
                     </Grid>
-                })}
+                ))}
             </Grid>
         </Container>
     )
