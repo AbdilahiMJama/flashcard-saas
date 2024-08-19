@@ -7,6 +7,7 @@ import {collection, getDoc, setDoc, doc} from 'firebase/firestore';
 import { useRouter } from "next/navigation";
 
 import { Container,CardActionArea, Card ,CardContent, Typography, Box, Grid } from "@mui/material";
+import NavigationAppBar from "../component/NavigationAppBar/page";
 
 export default function Flashcards() {
     const{isLoaded, isSignedIn, user} = useUser();
@@ -35,8 +36,10 @@ export default function Flashcards() {
     const handleCardClick = (id) => {
         router.push(`/flashcard?id=${id}`);
     }
+
     return(
-        <Container maxWidth="100vw">
+        <Container maxWidth="100vw" sx={{bgcolor:"white", height:"100vh"}}>
+            <NavigationAppBar></NavigationAppBar>
             <Grid container spacing = {3} sx={{mt:4}} >
                 {flashcards.map((flashcard, index) => (
                     <Grid item xs={12} sm={6} md={4} key={index}>

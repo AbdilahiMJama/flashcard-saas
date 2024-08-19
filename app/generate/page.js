@@ -7,6 +7,7 @@ import{useRouter} from 'next/navigation';
 import { useUser } from "@clerk/nextjs";
 import {db} from '@/firebase';
 //import{doc,getDoc,setDoc,collection, writeBatch} from 'firebase/firestore';
+import NavigationAppBar from "../component/NavigationAppBar/page";
 
 export default function Generate() {
     const{isLoaded, isSignedIn, user} = useUser();
@@ -75,7 +76,8 @@ export default function Generate() {
     
 }
     return (
-        <Container maxWidth='md'>
+        <Container maxWidth='100vw' height={'100vh'} sx={{overflow:"auto", bgcolor:"white"}}>
+            <NavigationAppBar></NavigationAppBar>
             <Box
              sx={{
                 mt: 4,

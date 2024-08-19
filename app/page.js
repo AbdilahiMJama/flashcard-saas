@@ -2,6 +2,7 @@ import getStripe from "@/utils/get-stripe";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { AppBar, Container, Toolbar, Typography, Button, Box, Grid } from "@mui/material";
 import Head from "next/head";
+import NavigationAppBar from "./component/NavigationAppBar/page";
 
 export default function Home() {
   return (
@@ -10,24 +11,7 @@ export default function Home() {
         <title>Flashcard Saas</title>
         <meta name="description" content="Flashcard Saas" />
       </Head>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" style={{ flexGrow: 1 }}
-          >Flashcard Saas</Typography>
-          <SignedOut>
-            <Button color="inherit" href="/sign-in">
-            {''}
-              Login
-            </Button>
-            <Button color="inherit" href="/sign-up">
-              Sign Up
-            </Button>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </Toolbar>
-      </AppBar>
+      <NavigationAppBar></NavigationAppBar>
       <Box
       sx = {{
         textAlign: 'center',
@@ -42,8 +26,8 @@ export default function Home() {
       <Box
       sx={{my: 6}}>
         <Typography variant="h4" component="h2" gutterBottom>Features</Typography>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={4}>
+        <Grid container spacing={2} sx={{display:'flex',justifyContent:'center', alignItems:'center'}}>
+          <Grid item xs={12} sm={6} md={4}>
             <Typography variant="h6" gutterBottom>
               Easy Text Input
             </Typography>
@@ -53,7 +37,7 @@ export default function Home() {
               has never been easier.
             </Typography>
           </Grid>
-          <Grid item xs={4} md={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <Typography variant="h6" gutterBottom>
               Smart Flashcards
             </Typography>
@@ -62,7 +46,7 @@ export default function Home() {
               Our AI intelligently breaks down your text into flashcards.
             </Typography>
           </Grid>
-          <Grid item xs={4} md={4}>
+          <Grid item xs={12} sm={6} md={4}>
             <Typography variant="h6" gutterBottom>
               Easy Text Input
             </Typography>
@@ -77,7 +61,7 @@ export default function Home() {
       <Box sx={{my: 6, textAlign: 'center'}}>
         <Typography variant="h4" component="h2" gutterBottom>Pricing</Typography>
         <Grid container spacing={4}>
-          <Grid item xs={6} md={6}>
+          <Grid item xs={12} sm={6} md={6}>
             <Box sx={{border: '1px solid #ccc', 
              borderRadius: 2, p: 3}}>
             <Typography variant="h5" gutterBottom>Basic</Typography>
@@ -89,7 +73,7 @@ export default function Home() {
             <Button variant="contained" color="primary" sx={{mt:2}} gutterBottom>Choose Basic</Button>
             </Box>
           </Grid>
-          <Grid item xs={6} md={6}>
+          <Grid item xs={12} sm={6} md={6}>
             <Box sx={{border: '1px solid #ccc', 
              borderRadius: 2, p: 3}}>
             <Typography variant="h5" gutterBottom>Pro</Typography>
