@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect } from "react"
+import { useEffect,useState } from "react"
 import { useRouter } from "next/navigation"
 import getStripe from "@/utils/get-stripe"
 import { useSearchParams } from "next/navigation"
-import { Container } from "postcss"
-import { Typography } from "@mui/material"
+// import { Container } from "postcss"
+import { CircularProgress, Typography,Box, Container } from "@mui/material"
 
 const ResultPage = () => { 
     const router = useRouter();
@@ -13,17 +13,18 @@ const ResultPage = () => {
     const session_id = searchParams.get('session_id');
 
     const[loading, setLoading] = useState(true);    
-    const[session, setSession] = useState(null);
+    const[session, setSession] = useState("null"); //set to string cause failing to run, null session cant be read
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchCheckoutSession =  async () => {
             if(!session_id) return
-
+            console.log(session_id)
+            console.log(session)
             try {
-                const response = await fetch(`/api/checkout_session?session_id=${session_id}`);
-                const sessionData = await response.json();
-                if (response.ok) {
+                const res = await fetch(`/api/checkout_session?session_id=${session_id}`);
+                const sessionData = await res.json();
+                if (res.ok) {
                     setSession(sessionData);
                 } else {
                     setError(sessionData.message);

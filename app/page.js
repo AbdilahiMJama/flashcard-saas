@@ -20,6 +20,7 @@ export default function Home() {
     }
     const stripe = await getStripe();
     const {error} = await stripe.redirectToCheckout({
+      sessionId: checkoutSessionJson.id
     })
     if(error) {
       console.warn(error.message)
