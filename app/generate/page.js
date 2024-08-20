@@ -16,7 +16,7 @@ export default function Generate() {
     const [name, setName] = useState('');
     const [open, setOpen] = useState(false);
     const router = useRouter();
-    const [dailyUse, setDailyUse] = useState('');
+    const [dailyUse, setDailyUse] = useState(0);
 
     const handleSubmit = async () => {
         fetch('api/generate', {
@@ -86,7 +86,7 @@ export default function Generate() {
         const userDocRef = doc(collection(db, 'users'), user.id)
         const docSnap = await getDoc(userDocRef)
 
-        setDailyUse(docSnap.data().usage)
+        setDailyUse(docSnap.data().usage  || dailyUse)
     }
 
     useEffect(() => {

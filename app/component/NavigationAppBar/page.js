@@ -4,19 +4,19 @@ import { AppBar, Container, Toolbar, Typography, Button, Box, Grid } from "@mui/
 
 export default function NavigationAppBar() {
   return (
-    <AppBar sx={{ position: "inherit", bgcolor: '#1b1b1b' }}>
+    <AppBar sx={{ position: "inherit", bgcolor: '#1b1b1b', pl: 4 }}>
       <Toolbar>
-        <Typography variant="h4" style={{flexGrow: 1 }}>
+        <Typography variant="h4" md={"h2"} style={{flexGrow: 1 }}>
           <Button
             href="/"
             disableRipple
             sx={{
-              ml:2,
-              transform: 'scale(1.2)',
+              ml: 2,
+              transform: 'scale(1.6)',
               color: 'inherit',
               '&:hover': {
                 bgcolor: 'initial',
-                transform: 'scale(1.6)', // Scale up the button
+                transform: 'scale(1.7)', // Scale up the button
               },
             }}
           >
@@ -33,9 +33,28 @@ export default function NavigationAppBar() {
           </Button>
         </SignedOut>
         <SignedIn>
-          <Button href="/generate" sx={{ color: "white" }}>Create</Button>
+          <Button href="/generate"
+            disableRipple
+            sx={{
+              color: "white",
+              '&:hover': {
+                bgcolor: 'initial',
+                transform: 'scale(1.2)', // Scale up the button
+              }
+
+            }}
+          >Create</Button>
           <div>|</div>
-          <Button href="/flashcards" sx={{ color: "white" }}>View</Button>
+          <Button href="/flashcards" disableRipple
+            sx={{
+              color: "white",
+              '&:hover': {
+                bgcolor: 'initial',
+                transform: 'scale(1.2)', // Scale up the button
+              }
+
+            }}
+          >View</Button>
           <div>|</div>
           <Box sx={{ pl: 2, pr: 2 }}>
             <UserButton />

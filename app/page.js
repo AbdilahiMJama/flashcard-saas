@@ -53,10 +53,10 @@ export default function Home() {
       </Box>
       <Divider></Divider>
       <Box
-        sx={{ mt:10, mb:35, textAlign: 'center' }}>
+        sx={{ mt:10, mb:25, textAlign: 'center' }}>
         <Typography fontFamily='cursive' variant="h3" sx={{ mb: 10}}>Features</Typography>
         <Grid container spacing={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={12} md={4}>
             <Typography fontFamily='cursive' variant="h6" sx={{ my: 4}}>
               Easy Text Input
             </Typography>
@@ -66,8 +66,8 @@ export default function Home() {
               has never been easier. Simply input your topic and let the magic happen.
             </Typography>
           </Grid>
-          <Divider orientation="vertical" flexItem />
-          <Grid item xs={12} sm={6} md={4}>
+          <Divider orientation="vertical" flexItem sx={{ml:4}} />
+          <Grid item xs={12} sm={12} md={4}>
             <Typography fontFamily='cursive' variant="h6" sx={{ my: 4}}>
               Smart Flashcards
             </Typography>
