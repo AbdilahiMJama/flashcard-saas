@@ -126,7 +126,6 @@ export default function Home() {
           <Typography>© 2024 FlashcardSaas</Typography>
           </Grid>
         </Grid>
-            
       </Box>
     </Container>
   )

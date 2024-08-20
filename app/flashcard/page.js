@@ -68,7 +68,7 @@ export default function Flashcard() {
         <Container maxWidth="100vw" sx={{ bgcolor: "white", height: "100vh", overflow: 'auto' }}>
             <NavigationAppBar></NavigationAppBar>
             <Box p={2} borderBottom={"2px solid black"}>
-                <Typography variant="h2" color={"black"}>Flashcards</Typography>
+                <Typography variant="h2" color={"black"}>{search.charAt(0).toUpperCase() + search.slice(1)}</Typography>
             </Box>
             <Grid container width={'100%'} padding={2} sx={{ boxShadow: 4, borderRadius: 4, mb: 2, mt: 1 }}>
                 <Box
