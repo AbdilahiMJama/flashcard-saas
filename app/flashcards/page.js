@@ -1,9 +1,8 @@
 'use client'
 import { useUser } from "@clerk/nextjs";
 import { use, useEffect, useState } from "react";
-
 import { db } from '@/firebase';
-import { collection, getDoc, setDoc, doc, deleteField, writeBatch, getDocs, deleteDoc } from 'firebase/firestore';
+import { collection, getDoc, setDoc, doc, updateDoc, writeBatch, getDocs, deleteDoc } from 'firebase/firestore';
 import { useRouter } from "next/navigation";
 
 import { Container, CardActionArea, Card, CardContent, Typography, Box, Grid, Button } from "@mui/material";
@@ -14,21 +13,22 @@ export default function Flashcards() {
     const router = useRouter();
     const [flashcards, setFlashcards] = useState([]);
 
-    useEffect(() => {
-        async function getFlashcards() {
-            if (!user) return
-            const docRef = doc(collection(db, 'users'), user.id);
-            const docSnap = await getDoc(docRef);
+    async function getFlashcards() {
+        if (!user) return
+        const docRef = doc(collection(db, 'users'), user.id);
+        const docSnap = await getDoc(docRef);
 
-            if (docSnap.exists()) {
-                const collections = docSnap.data().flashcards || [];
-                console.log(collections);
-                setFlashcards(collections);
-            } else {
-                await setDoc(docRef, { flashcards: [] });
-            }
-
+        if (docSnap.exists()) {
+            const collections = docSnap.data().flashcards || [];
+            // console.log(collections);
+            setFlashcards(collections);
+        } else {
+            await setDoc(docRef, { flashcards: [] });
         }
+    }
+
+
+    useEffect(() => {
         getFlashcards();
     }, [user])
 
@@ -37,35 +37,37 @@ export default function Flashcards() {
         router.push(`/flashcard?id=${id}`);
     }
 
-    async function deleteCollection(id) {
-        const firestoreInstance = getFirestore();
-        const collectionPath = `users/${user.id}/${id}`
-        // collection(doc(collection(db, 'users'), user.id), id);
-        const collectionRef = firestoreInstance.collection(collectionPath);
-        const snapshot = await collectionRef.get();
-
-        if (!snapshot.empty) {
-            const batch = firestoreInstance.batch();
-
-            snapshot.docs.forEach((doc) => {
-                batch.delete(doc.ref);
-            });
-
-            await batch.commit();
-            console.log('All documents deleted from the collection.');
-        } else {
-            console.log('The collection is already empty.');
-        }
+    const deleteFlashcard = async (name, id) => {
+        // console.log('Deleting document at path:', `users/${user.id}/${search}/${id}`);
+        await deleteDoc(doc(db, 'users', user.id, name, id));
     }
 
-    // Example usage
-    // deleteAllDocuments('your-collection-name')
-    //     .then(() => {
-    //         console.log('Operation completed successfully!');
-    //     })
-    //     .catch((error) => {
-    //         console.error('Error deleting documents:', error);
-    //     });
+    async function deleteCollection(id) {
+        const docRef = collection(doc(collection(db, 'users'), user.id), id);
+        const docs = await getDocs(docRef);
+
+        docs.forEach((doc) => {
+            // const document = doc(db,'users', user.id,id,doc.id)
+            deleteFlashcard(id, doc.id)
+
+        });
+
+        // remove map to collection
+        const userDocRef = doc(collection(db, 'users'), user.id)
+        const docSnap = await getDoc(userDocRef)
+        const collections = docSnap.data().flashcards || [];
+
+        let newFlashcard = [];
+        collections.forEach((set) => {
+            if (set.name != id) {
+                newFlashcard.push({ 'name': set.name })
+            }
+
+        })
+
+        await updateDoc(userDocRef, { flashcards: newFlashcard })
+        getFlashcards()
+    }
 
     return (
         <Container maxWidth="100vw" sx={{ bgcolor: "white", height: "100vh" }}>
@@ -73,7 +75,7 @@ export default function Flashcards() {
             <Grid container spacing={3} sx={{ mt: 4 }} >
                 {flashcards.map((flashcard, index) => (
                     <Grid item xs={12} sm={6} md={4} key={index}>
-                        <Button onClick={() => { console.log(flashcard.name); deleteCollection(flashcard.name) }}> X</Button>
+                        <Button onClick={() => {deleteCollection(flashcard.name) }}> X</Button>
                         <Card>
                             <CardActionArea
                                 onClick={() => {
