@@ -7,7 +7,7 @@ export default function NavigationAppBar(){
         <AppBar sx={{position:"inherit", bgcolor:'#1b1b1b'}}>
         <Toolbar>
           <Typography variant="h6" style={{ flexGrow: 1 }}
-          >Flashcard Saas</Typography>
+          >Flashcard Generator</Typography>
           <SignedOut>
             <Button color="inherit" href="/sign-in">
             {''}
