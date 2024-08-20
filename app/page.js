@@ -4,6 +4,7 @@ import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { AppBar, Container, Toolbar, Typography, Button, Box, Grid, Divider } from "@mui/material";
 import Head from "next/head";
 import NavigationAppBar from "./component/NavigationAppBar/page";
+import Image from 'next/image';
 
 export default function Home() {
   const handleSubmit = async () => {
@@ -31,8 +32,8 @@ export default function Home() {
   return (
     <Container maxWidth="100vw" sx={{ bgcolor: "white", height: "100vh", color: 'black', overflow: 'auto',}}>
       <Head>
-        <title>Flashcard Saas</title>
-        <meta name="description" content="Flashcard Saas" />
+        <title>Flashcard Generator</title>
+        <meta name="description" content="Flashcard Generator" />
       </Head>
       <NavigationAppBar></NavigationAppBar>
       <Box
@@ -41,47 +42,43 @@ export default function Home() {
           my: 4,
         }}
       >
-        <Typography variant="h2" fontFamily='cursive' sx={{mt:10, mb:2,}}>Welcome to Flashcard Saas</Typography>
+        <Typography variant="h2" fontFamily='cursive' sx={{mt:10, mb:10,}}>Welcome to Flashcard Generator</Typography>
         <Typography variant="h5" fontFamily='cursive'>
           {' '}
           The easiest way to make flashcards from your text</Typography>
-        <Button variant="contained" sx={{mt:40, mb:5}} color="primary">Get Started</Button>
+          <Typography variant="h5" fontFamily='cursive'>Generate any flashcards as you go on any topic of your choosing</Typography>
+          <Box sx ={{display: "flex", justifyContent: 'center', my:'30px'}}>
+            <Image src="/flash-cards.png" alt="flashcard" width={400} height={400} objectPosition="absolute"/>
+          </Box>
       </Box>
       <Divider></Divider>
       <Box
-        sx={{ mt: 6,mb:15, textAlign: 'center' }}>
+        sx={{ mt:10, mb:35, textAlign: 'center' }}>
         <Typography fontFamily='cursive' variant="h3" sx={{ mb: 10}}>Features</Typography>
         <Grid container spacing={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Grid item xs={12} sm={6} md={4}>
-            <Typography fontFamily='cursive' variant="h6" sx={{ my: 5}}>
+            <Typography fontFamily='cursive' variant="h6" sx={{ my: 4}}>
               Easy Text Input
             </Typography>
             <Typography fontFamily='cursive'>
               {' '}
               Simply input your text and let our software do the rest. Creating flashcards
-              has never been easier.
+              has never been easier. Simply input your topic and let the magic happen.
             </Typography>
           </Grid>
+          <Divider orientation="vertical" flexItem />
           <Grid item xs={12} sm={6} md={4}>
-            <Typography fontFamily='cursive' variant="h6" sx={{ my: 5}}>
+            <Typography fontFamily='cursive' variant="h6" sx={{ my: 4}}>
               Smart Flashcards
             </Typography>
             <Typography fontFamily='cursive'>
               {' '}
-              Our AI intelligently breaks down your text into flashcards.
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Typography fontFamily='cursive' variant="h6" sx={{ my: 5}}>
-              Easy Text Input
-            </Typography>
-            <Typography fontFamily='cursive'>
-              {' '}
-              Simply input your text and let our software do the rest. Creating flashcards
-              has never been easier.
+              Our AI intelligently breaks down your text into flashcards. State of the art technology with a simple interface with the goal of making learning efficient.
+              Easy to customize and all about you.
             </Typography>
           </Grid>
         </Grid>
+        <Button variant="contained" color="primary" sx={{ mt: 20 }}>Learn More</Button>
       </Box>
       <Divider></Divider>
       <Box sx={{ mt:6,mb:20 , textAlign: 'center' }}>
@@ -98,7 +95,7 @@ export default function Home() {
                 {' '}
                 Access to basic flashcard feature and limited storage.
               </Typography>
-              <Button variant="contained" color="primary" sx={{ mt: 2 }} gutterBottom>Choose Basic</Button>
+              <Button variant="contained" color="primary" sx={{ mt: 2 }} gutterbottom>Choose Basic</Button>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
@@ -124,6 +121,7 @@ export default function Home() {
           </Grid>
           <Grid item xs={12} sm={4}>
           <Typography>© 2024 FlashcardSaas</Typography>
+          <Typography>All Icons and Logos are attribute to FlatIcon at <a href="https://www.flaticon.com/free-icons/flashcard" title="flashcard icons">Flashcard icons created by manshagraphics - Flaticon</a></Typography>
           </Grid>
         </Grid>
       </Box>

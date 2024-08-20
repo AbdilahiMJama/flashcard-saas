@@ -20,7 +20,7 @@ export default function NavigationAppBar() {
               },
             }}
           >
-            Flashcard Saas
+            Flashcard Generator
           </Button>
         </Typography>
         <SignedOut>
