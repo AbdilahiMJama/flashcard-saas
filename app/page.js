@@ -1,12 +1,13 @@
 'use client'
 import getStripe from "@/utils/get-stripe";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
 import { AppBar, Container, Toolbar, Typography, Button, Box, Grid, Divider } from "@mui/material";
 import Head from "next/head";
 import NavigationAppBar from "./component/NavigationAppBar/page";
 import Image from 'next/image';
 
 export default function Home() {
+  const { isLoaded, isSignedIn, user } = useUser();
   const handleSubmit = async () => {
     const checkoutSession = await fetch('/api/checkout_session', {
       method: 'POST',
@@ -95,7 +96,7 @@ export default function Home() {
                 {' '}
                 Access to basic flashcard feature and limited storage.
               </Typography>
-              <Button variant="contained" color="primary" sx={{ mt: 2 }} gutterbottom>Choose Basic</Button>
+              <Button href="/sign-up"  disabled={isSignedIn} variant="contained" color="primary" sx={{ mt: 2 }} gutterbottom>{isSignedIn ? `Current Plan` : "Choose Basic"}</Button>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
