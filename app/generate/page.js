@@ -4,7 +4,7 @@ import { Box, Container, Paper, TextField, Typography, Button, Grid, CardActionA
 import { doc, getDoc, setDoc, collection, writeBatch, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
-import { useUser } from "@clerk/nextjs";
+import { SignedIn, useUser } from "@clerk/nextjs";
 import { db } from '@/firebase';
 import NavigationAppBar from "../component/NavigationAppBar/page";
 
@@ -86,11 +86,15 @@ export default function Generate() {
         const userDocRef = doc(collection(db, 'users'), user.id)
         const docSnap = await getDoc(userDocRef)
 
-        setDailyUse(docSnap.data().usage  || dailyUse)
+        setDailyUse(docSnap.data().usage || dailyUse)
     }
 
     useEffect(() => {
-        if (isLoaded) getUsage()
+        if (isLoaded) {
+            if (!user) {
+                router.push('/')
+            }else { getUsage() }
+        }
     }, [dailyUse, isLoaded, user])
 
 
@@ -111,7 +115,7 @@ export default function Generate() {
                             <Typography variant="h4"> Generate Flashcards</Typography>
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <Typography variant="h6" sx={{ mb: 5, mt: 2 }}> Generated Today: {dailyUse}/10</Typography>
+                            <Typography variant="h6" sx={{ mb: 5, mt: 2 }}> Generated Total: {dailyUse}</Typography>
                         </Grid>
 
                         <Grid item xs={12} md={6}>
